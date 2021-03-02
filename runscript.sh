@@ -31,9 +31,14 @@ while read url; do
 	zap-cli open-url "$url"
 	zap-cli spider "$url"
 	zap-cli ajax-spider "$url"
-	zap-cli quick-scan "$url"
+
+###     Turn on quick scan by removing #
+#	zap-cli quick-scan "$url"
 
 ###	Turn on active scan by removing #
+	zap-cli active-scan --recursive "$url"
+
+###	Turn on scanners option with xss, sqli remove #
 #	zap-cli active-scan --scanners xss,sqli --recursive "$url"
 
 	zap-cli report -o "/app/reports/html/${url//[^a-zA-Z0-9]/_}_report.html" -f html
